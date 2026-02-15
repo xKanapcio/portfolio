@@ -1,70 +1,279 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Portfolio | Kanapcio</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KANAPCIO / Portoflio</title>
+    
+    <link href="https://fonts.cdnfonts.com/css/monument-extended" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
+    <style>
+        :root {
+            --bg: #050505;
+            --accent: #ffffff;
+            --secondary: #1a1a1a;
+            --text-dim: #888;
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.15s ease;
+            display: none;
+        }
+
+        @media (min-width: 1024px) { #cursor { display: block; } }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.7);
+        }
+
+        .logo {
+            font-family: 'Monument Extended', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-email {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.8rem;
+            border: 1px solid var(--accent);
+            padding: 8px 20px;
+            border-radius: 100px;
+            transition: var(--transition);
+        }
+
+        .nav-email:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+        }
+
+        .hero-label {
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Monument Extended', sans-serif;
+            font-size: clamp(3rem, 12vw, 9rem);
+            line-height: 0.9;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .hero-desc {
+            max-width: 500px;
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            font-weight: 300;
+        }
+
+        /* Portfolio Grid */
+        .work {
+            padding: 100px 5%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px 40px;
+        }
+
+        .item {
+            text-decoration: none;
+            color: var(--accent);
+            display: block;
+        }
+
+        .img-container {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: var(--secondary);
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1);
+            transition: var(--transition);
+        }
+
+        .item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0);
+        }
+
+        .item h3 {
+            font-family: 'Monument Extended', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .item p {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 150px 10% 50px;
+            text-align: left;
+        }
+
+        .footer-title {
+            font-family: 'Monument Extended', sans-serif;
+            font-size: clamp(2rem, 6vw, 5rem);
+            margin-bottom: 60px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            border-top: 1px solid var(--secondary);
+            padding-top: 40px;
+        }
+
+        .contact-unit h4 {
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .contact-unit p {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
 <body>
 
-<nav>
-  <ul>
-    <li><a href="#miniaturki">Miniaturki</a></li>
-    <li><a href="#avatary">Avatary</a></li>
-  </ul>
-</nav>
+    <div id="cursor"></div>
 
-<header>
-  <h1>Siema, jestem Kanapcio 👋</h1>
-  <p>Grafik</p>
-</header>
+    <nav>
+        <div class="logo">Kanapcio</div>
+        <a href="mailto:kanapcio.biznes@gmail.com" class="nav-email">ZACZNIJMY PROJEKT</a>
+    </nav>
 
-<div class="hero">
+    <header>
+        <span class="hero-label">BASED IN POLAND</span>
+        <h1>Digital<br>Visualist</h1>
+        <p class="hero-desc">Tworzę estetykę, która przyciąga oko i zostaje w pamięci. Twoja marka zasługuje na coś więcej niż standard.</p>
+    </header>
 
-  <div class="avatar-container">
-    <img src="avatar.png" alt="Avatar Kanapcio">
-  </div>
-</div>
+    <section class="work">
+        <div class="grid">
+            <div class="item">
+                <div class="img-container">
+                    <img src="https://via.placeholder.com/1200x800/1a1a1a/ffffff?text=PROJEKT+01" alt="Projekt">
+                </div>
+                <h3>Visual Identity</h3>
+                <p>Branding / Typography</p>
+            </div>
 
-<section id="about">
-  <h2>O mnie</h2>
-  <p>
-    Cześć, Jestem grafikiem i zajmuję się już grafikami od kilku
-    miesięcy! Z chęcią wykonam twoje zamówienie!
-  </p>
-</section>
+            <div class="item">
+                <div class="img-container">
+                    <img src="https://via.placeholder.com/1200x800/1a1a1a/ffffff?text=PROJEKT+02" alt="Projekt">
+                </div>
+                <h3>Social Media Engine</h3>
+                <p>Digital Art / Marketing</p>
+            </div>
+        </div>
+    </section>
 
-<section id="miniaturki">
-  <h2>Miniaturki</h2>
-  <p>Moje miniaturki na YouTube i social media.</p>
-  <div class="gallery">
-    <img src="miniaturka1.png" alt="Miniaturka">
-    <img src="miniaturka2.png" alt="">
-    <img src="miniaturka3.png" alt="">
-    <img src="miniaturka4.png" alt="">
-    <img src="miniaturka5.png" alt="">
-    <img src="miniaturka6.png" alt="">
-    <img src="miniaturka7.png" alt="">
-  </div>
-</section>
+    <footer>
+        <div class="footer-title">Let's create<br>the future.</div>
+        <div class="contact-grid">
+            <div class="contact-unit">
+                <h4>EMAIL</h4>
+                <p>kanapcio.biznes@gmail.com</p>
+            </div>
+            <div class="contact-unit">
+                <h4>DISCORD</h4>
+                <p>kanapcio.</p>
+            </div>
+            <div class="contact-unit">
+                <h4>STATUS</h4>
+                <p>Dostępny na zlecenia</p>
+            </div>
+        </div>
+    </footer>
 
-<section id="avatary">
-  <h2>Avatary</h2>
-  <p>Avatary do profili, Discorda, YouTube itd.</p>
-  <div class="avatar1-container">
-    <img src="avatar1.png" alt="Avatar">
-    <img src="avatar2.png" alt="Avatar">
-    <img src="avatar3.png" alt="Avatar">
-  </div>
-</section>
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
 
-<section id="contact">
-  <h2>Kontakt</h2>
-  <p>Email: kanapcio.biznes@gmail.com</p>
-  <p>Discord: kanapcio.</p>
-</section>
+        document.querySelectorAll('a, .item').forEach(link => {
+            link.addEventListener('mouseenter', () => cursor.style.transform = 'scale(3)');
+            link.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+    </script>
 
-<script src="script.js"></script>
 </body>
 </html>
