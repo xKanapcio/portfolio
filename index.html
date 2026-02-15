@@ -3,148 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KANAPCIO / Portoflio</title>
+    <title>KANAPCIO / Creative Portfolio</title>
     
     <link href="https://fonts.cdnfonts.com/css/monument-extended" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #050505;
+            --bg: #080808;
             --accent: #ffffff;
-            --secondary: #1a1a1a;
-            --text-dim: #888;
-            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            --card-bg: #121212;
+            --text-gray: #777;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            outline: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
 
         body {
             background-color: var(--bg);
             color: var(--accent);
             font-family: 'Inter', sans-serif;
-            line-height: 1.5;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
         }
 
-        /* Custom Cursor */
-        #cursor {
-            width: 20px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.15s ease;
-            display: none;
-        }
-
-        @media (min-width: 1024px) { #cursor { display: block; } }
-
-        /* Navigation */
+        /* --- NAWIGACJA --- */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 30px 5%;
+            top: 0; width: 100%;
+            padding: 25px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            background: rgba(5, 5, 5, 0.7);
+            z-index: 1000;
+            background: rgba(8, 8, 8, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #1a1a1a;
         }
 
         .logo {
             font-family: 'Monument Extended', sans-serif;
-            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-size: 1.1rem;
             letter-spacing: 2px;
-            text-transform: uppercase;
         }
 
-        .nav-email {
-            text-decoration: none;
+        .nav-links a {
             color: var(--accent);
-            font-weight: 700;
+            text-decoration: none;
             font-size: 0.8rem;
-            border: 1px solid var(--accent);
-            padding: 8px 20px;
-            border-radius: 100px;
-            transition: var(--transition);
+            font-weight: 700;
+            margin-left: 30px;
+            letter-spacing: 1px;
         }
 
-        .nav-email:hover {
-            background: var(--accent);
-            color: var(--bg);
-        }
-
-        /* Hero Section */
+        /* --- HERO --- */
         header {
-            height: 100vh;
+            height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 0 10%;
         }
 
-        .hero-label {
-            font-size: 0.7rem;
-            letter-spacing: 5px;
-            color: var(--text-dim);
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        h1 {
+        header h1 {
             font-family: 'Monument Extended', sans-serif;
-            font-size: clamp(3rem, 12vw, 9rem);
+            font-size: clamp(2.5rem, 10vw, 7rem);
             line-height: 0.9;
-            margin-bottom: 40px;
-            text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
-        .hero-desc {
-            max-width: 500px;
+        header p {
+            color: var(--text-gray);
             font-size: 1.1rem;
-            color: var(--text-dim);
-            font-weight: 300;
+            max-width: 450px;
         }
 
-        /* Portfolio Grid */
-        .work {
+        /* --- SEKCJA PORTFOLIO --- */
+        .portfolio-section {
             padding: 100px 5%;
         }
 
-        .grid {
+        .section-title {
+            font-family: 'Monument Extended', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: #222;
+        }
+
+        .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 60px 40px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
         }
 
-        .item {
-            text-decoration: none;
-            color: var(--accent);
-            display: block;
-        }
-
-        .img-container {
-            width: 100%;
-            aspect-ratio: 16/10;
-            background: var(--secondary);
+        .work-card {
+            background: var(--card-bg);
+            border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 20px;
+            transition: var(--transition);
+            border: 1px solid #1a1a1a;
             position: relative;
         }
 
-        .img-container img {
+        .work-card:hover {
+            transform: translateY(-10px);
+            border-color: #444;
+        }
+
+        .img-holder {
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Idealne pod miniatury */
+            background: #1a1a1a;
+            overflow: hidden;
+        }
+
+        .img-holder img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -152,128 +134,129 @@
             transition: var(--transition);
         }
 
-        .item:hover img {
-            transform: scale(1.05);
+        .work-card:hover .img-holder img {
             filter: grayscale(0);
+            transform: scale(1.05);
         }
 
-        .item h3 {
-            font-family: 'Monument Extended', sans-serif;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
+        .work-info {
+            padding: 20px;
         }
 
-        .item p {
-            color: var(--text-dim);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Footer */
-        footer {
-            padding: 150px 10% 50px;
-            text-align: left;
-        }
-
-        .footer-title {
-            font-family: 'Monument Extended', sans-serif;
-            font-size: clamp(2rem, 6vw, 5rem);
-            margin-bottom: 60px;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            border-top: 1px solid var(--secondary);
-            padding-top: 40px;
-        }
-
-        .contact-unit h4 {
-            color: var(--text-dim);
+        .work-info span {
             font-size: 0.7rem;
-            margin-bottom: 10px;
+            color: var(--text-gray);
+            text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        .contact-unit p {
-            font-weight: 700;
+        .work-info h3 {
             font-size: 1.1rem;
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        /* --- KONTAKT --- */
+        footer {
+            padding: 100px 10%;
+            background: #050505;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-content h2 {
+            font-family: 'Monument Extended', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 40px;
+        }
+
+        .contact-detail {
+            margin-bottom: 20px;
+        }
+
+        .contact-detail label {
+            display: block;
+            color: var(--text-gray);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .contact-detail p {
+            font-size: 1.5rem;
+            font-weight: 900;
         }
 
         @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div id="cursor"></div>
-
     <nav>
-        <div class="logo">Kanapcio</div>
-        <a href="mailto:kanapcio.biznes@gmail.com" class="nav-email">ZACZNIJMY PROJEKT</a>
+        <div class="logo">KANAPCIO</div>
+        <div class="nav-links">
+            <a href="#portfolio">PORTFOLIO</a>
+            <a href="mailto:kanapcio.biznes@gmail.com">KONTAKT</a>
+        </div>
     </nav>
 
     <header>
-        <span class="hero-label">BASED IN POLAND</span>
-        <h1>Digital<br>Visualist</h1>
-        <p class="hero-desc">Tworzę estetykę, która przyciąga oko i zostaje w pamięci. Twoja marka zasługuje na coś więcej niż standard.</p>
+        <h1>SELECTED<br>WORKS</h1>
+        <p>Specjalista od miniatur, avatarów i identyfikacji wizualnej, która przyciąga wzrok.</p>
     </header>
 
-    <section class="work">
-        <div class="grid">
-            <div class="item">
-                <div class="img-container">
-                    <img src="https://via.placeholder.com/1200x800/1a1a1a/ffffff?text=PROJEKT+01" alt="Projekt">
+    <section class="portfolio-section" id="portfolio">
+        <h2 class="section-title">PORTFOLIO</h2>
+        
+        <div class="portfolio-grid">
+            
+            <div class="work-card">
+                <div class="img-holder">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="Projekt 1">
                 </div>
-                <h3>Visual Identity</h3>
-                <p>Branding / Typography</p>
+                <div class="work-info">
+                    <span>Youtube Design</span>
+                    <h3>High-Click Thumbnail</h3>
+                </div>
             </div>
 
-            <div class="item">
-                <div class="img-container">
-                    <img src="https://via.placeholder.com/1200x800/1a1a1a/ffffff?text=PROJEKT+02" alt="Projekt">
+            <div class="work-card">
+                <div class="img-holder" style="aspect-ratio: 1/1; max-width: 300px; margin: 0 auto;">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="Projekt 2">
                 </div>
-                <h3>Social Media Engine</h3>
-                <p>Digital Art / Marketing</p>
+                <div class="work-info" style="text-align: center;">
+                    <span>Brand Identity</span>
+                    <h3>Custom Avatar Design</h3>
+                </div>
             </div>
+
+            <div class="work-card">
+                <div class="img-holder">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="Projekt 3">
+                </div>
+                <div class="work-info">
+                    <span>Social Media</span>
+                    <h3>Stream Overlay / Banner</h3>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <footer>
-        <div class="footer-title">Let's create<br>the future.</div>
-        <div class="contact-grid">
-            <div class="contact-unit">
-                <h4>EMAIL</h4>
+        <div class="footer-content">
+            <h2>LET'S WORK.</h2>
+            <div class="contact-detail">
+                <label>E-MAIL</label>
                 <p>kanapcio.biznes@gmail.com</p>
             </div>
-            <div class="contact-unit">
-                <h4>DISCORD</h4>
+            <div class="contact-detail">
+                <label>DISCORD</label>
                 <p>kanapcio.</p>
-            </div>
-            <div class="contact-unit">
-                <h4>STATUS</h4>
-                <p>Dostępny na zlecenia</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Custom Cursor Logic
-        const cursor = document.getElementById('cursor');
-        
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        document.querySelectorAll('a, .item').forEach(link => {
-            link.addEventListener('mouseenter', () => cursor.style.transform = 'scale(3)');
-            link.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
-        });
-    </script>
 
 </body>
 </html>
