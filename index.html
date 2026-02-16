@@ -45,10 +45,10 @@
 
         /* Magia CSS */
         .tab-content { display: none; animation: fadeIn 0.6s ease forwards; }
-        miniaturki { display: grid; }
-        :target ~ miniaturki { display: none; }
-        miniaturki:target { display: grid; }
-        avatary:target, bannery:target { display: grid; }
+        #miniaturki { display: grid; }
+        :target ~ #miniaturki { display: none; }
+        #miniaturki:target { display: grid; }
+        #avatary:target, #bannery:target { display: grid; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
@@ -97,9 +97,9 @@
 
     <div class="main-container">
         <div class="tabs-nav">
-            <a href="miniaturki">/ MINIATURKI</a>
-            <a href="avatary">/ AVATARY</a>
-            <a href="bannery">/ BANNERY</a>
+            <a href="#miniaturki">/ MINIATURKI</a>
+            <a href="#avatary">/ AVATARY</a>
+            <a href="#bannery">/ BANNERY</a>
         </div>
 
         <div id="avatary" class="tab-content gallery">
