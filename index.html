@@ -18,7 +18,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
-        body { background: var(--bg); color: var(--accent); font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--accent); font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
 
         /* --- NAWIGACJA --- */
         nav {
@@ -35,7 +35,7 @@
         
         .main-container { padding: 0 5% 100px; }
 
-        /* --- SYSTEM ZAKŁADEK (TABS) --- */
+        /* --- SYSTEM ZAKŁADEK (CSS ONLY) --- */
         .tabs-nav {
             display: flex; gap: 20px; margin-bottom: 40px; border-bottom: 1px solid #1a1a1a; padding-bottom: 20px;
             overflow-x: auto;
@@ -44,26 +44,37 @@
             text-decoration: none; color: var(--text-gray); font-family: 'Monument Extended', sans-serif;
             font-size: 0.8rem; transition: 0.3s; white-space: nowrap;
         }
+        
+        /* Podświetlanie aktywnej zakładki na podstawie URL */
         .tabs-nav a:hover { color: white; }
 
-        /* Magia CSS: Pokazywanie sekcji na podstawie adresu URL (#id) */
-        .tab-content { display: none; animation: fadeIn 0.5s ease forwards; }
-        
-        /* Domyślnie pokazuj miniaturki lub to, co jest w linku */
-        #miniaturki:target, #avatary:target, #bannery:target { display: grid; }
-        
-        /* Jeśli nie ma żadnego targetu, pokaż miniaturki jako startową */
-        #miniaturki { display: grid; } 
-        :target ~ #miniaturki { display: none; } /* Ukrywa domyślne, gdy inny target jest aktywny */
+        /* Magia CSS: Ukrywanie i pokazywanie sekcji */
+        .tab-content { 
+            display: none; 
+            animation: fadeIn 0.6s ease forwards; 
+        }
+
+        /* 1. Domyślnie pokazuj miniaturki */
+        #miniaturki { display: grid; }
+
+        /* 2. Jeśli jakikolwiek element jest aktywny (:target), ukryj domyślne miniaturki... */
+        :target ~ #miniaturki { display: none; }
+
+        /* 3. ...chyba że tym aktywnym elementem są właśnie miniaturki */
+        #miniaturki:target { display: grid; }
+
+        /* 4. Pokaż inne sekcje jeśli są aktywne */
+        #avatary:target, #bannery:target { 
+            display: grid; 
+        }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- GALERIA --- */
         .gallery {
-            display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
         }
@@ -106,30 +117,35 @@
             <a href="#bannery">/ BANNERY</a>
         </div>
 
-        <div id="miniaturki" class="tab-content gallery">
-            <div class="work-item">
-                <img src="LINK_DO_TWOJEJ_GRAFIKI_1" alt="Miniaturka 1">
-                <div class="work-desc">Case Study #01</div>
-            </div>
-            <div class="work-item">
-                <img src="LINK_DO_TWOJEJ_GRAFIKI_2" alt="Miniaturka 2">
-                <div class="work-desc">Case Study #02</div>
-            </div>
-        </div>
-
         <div id="avatary" class="tab-content gallery">
             <div class="work-item">
-                <img src="LINK_DO_TWOJEGO_AVATARA_1" alt="Avatar 1">
-                <div class="work-desc">Avatar Vector</div>
+                <img src="https://via.placeholder.com/600x600/111/fff?text=AVATAR+1" alt="Avatar 1">
+                <div class="work-desc">Avatar Vector #01</div>
+            </div>
+            <div class="work-item">
+                <img src="https://via.placeholder.com/600x600/111/fff?text=AVATAR+2" alt="Avatar 2">
+                <div class="work-desc">Avatar Vector #02</div>
             </div>
         </div>
 
         <div id="bannery" class="tab-content gallery">
             <div class="work-item">
-                <img src="LINK_DO_TWOJEGO_BANNERU_1" alt="Banner 1">
-                <div class="work-desc">YouTube Banner</div>
+                <img src="https://via.placeholder.com/1200x400/111/fff?text=BANNER+YT" alt="Banner 1">
+                <div class="work-desc">YouTube Banner Design</div>
             </div>
         </div>
+
+        <div id="miniaturki" class="tab-content gallery">
+            <div class="work-item">
+                <img src="https://via.placeholder.com/600x337/111/fff?text=MINIATURKA+1" alt="Miniaturka 1">
+                <div class="work-desc">Case Study #01</div>
+            </div>
+            <div class="work-item">
+                <img src="https://via.placeholder.com/600x337/111/fff?text=MINIATURKA+2" alt="Miniaturka 2">
+                <div class="work-desc">Case Study #02</div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
