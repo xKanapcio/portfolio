@@ -70,38 +70,38 @@
         }
 
         .gallery { 
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-    gap: 25px; 
-    /* Karty będą równej wysokości w całym rzędzie */
-    align-items: stretch; 
-}
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 25px; 
+        }
 
-.work-item { 
-    background: var(--card-bg); 
-    border: 1px solid #1a1a1a; 
-    overflow: hidden; 
-    transition: var(--transition); 
-    display: flex;
-    flex-direction: column;
-    /* Sprawia, że opis zawsze wyląduje na samym dole karty */
-    justify-content: space-between; 
-    height: 100%;
-}
+        .work-item { 
+            background: var(--card-bg); 
+            border: 1px solid #1a1a1a; 
+            overflow: hidden; 
+            transition: var(--transition); 
+            display: flex;
+            flex-direction: column;
+        }
+        .work-item:hover { border-color: #444; transform: scale(1.02); }
 
-.work-item img { 
-    width: 100%; 
-    /* Każdy obrazek zajmie maksymalnie tyle samo miejsca, dopasowując się */
-    height: 200px; 
-    object-fit: cover; 
-    display: block; 
-    filter: grayscale(1); 
-    transition: 0.5s; 
-}
+        .work-item img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            filter: grayscale(1); 
+            transition: 0.5s; 
+        }
         .work-item:hover img { filter: grayscale(0); }
         .work-desc { padding: 15px; font-size: 0.8rem; color: var(--text-gray); text-transform: uppercase; }
 
         footer { padding: 80px 10%; border-top: 1px solid #1a1a1a; text-align: left; }
         .contact-link { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; display: block; color: white; text-decoration: none; }
+
+        .fix-embed {
+    height: 100%;
+    object-fit: cover;
+    min-height: 220px; /* Dopasuj tę wartość (np. 200px-250px), żeby wysokość karty zgadzała się z Embedem #02 */
+}
     </style>
 </head>
 <body>
@@ -179,15 +179,15 @@
         </div>
 
         <div id="embedy" class="tab-content gallery">
-            <div class="work-item">
-                <img src="https://imgur.com/iHbKUb4.png" alt="E 1">
-                <div class="work-desc">Embed #01</div>
-            </div>
-            <div class="work-item">
-                <img src="https://imgur.com/TUV0stz.png" alt="E 2">
-                <div class="work-desc">Embed #02</div>
-            </div>
-        </div>
+    <div class="work-item">
+        <img src="https://imgur.com/iHbKUb4.png" alt="E 1" class="fix-embed">
+        <div class="work-desc">Embed #01</div>
+    </div>
+    <div class="work-item">
+        <img src="https://imgur.com/TUV0stz.png" alt="E 2">
+        <div class="work-desc">Embed #02</div>
+    </div>
+</div>
 
     </div>
 
