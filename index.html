@@ -28,7 +28,7 @@
         }
         .logo { font-family: 'Monument Extended', sans-serif; font-size: 1.1rem; letter-spacing: 2px; }
 
-        header { height: 60vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; }
+        header { height: 60vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; margin-top: 80px; }
         h1 { font-family: 'Monument Extended', sans-serif; font-size: clamp(2rem, 8vw, 6rem); line-height: 0.9; margin-bottom: 20px; }
         
         .main-container { padding: 0 5% 100px; }
@@ -43,12 +43,26 @@
         }
         .tabs-nav a:hover { color: white; }
 
-        /* Magia CSS */
+        /* Magia CSS pod zakładki */
         .tab-content { display: none; animation: fadeIn 0.6s ease forwards; }
+        
+        /* Domyślny stan - pokaż miniaturki, gdy brak hashtaga w URL */
         #miniaturki { display: grid; }
-        :target ~ #miniaturki { display: none; }
+        
+        /* Gdy aktywny jest JAKIKOLWIEK target, ukryj domyślne miniaturki... */
+        :has(:target) #miniaturki { display: none; }
+        
+        /* ...chyba że to właśnie miniaturki są targetem */
         #miniaturki:target { display: grid; }
-        #avatary:target, #bannery:target { display: grid; }
+        
+        /* Wyświetlanie pozostałych sekcji, gdy są aktywne */
+        #avatary:target, 
+        #bannery:target, 
+        #loga:target, 
+        #bannery-minecraft:target, 
+        #embedy:target { 
+            display: grid; 
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
@@ -169,7 +183,9 @@
             </div>
         </div>
 
-    </div> <footer>
+    </div>
+
+    <footer>
         <p style="color: #444; margin-bottom: 20px;">LET'S CONNECT</p>
         <a href="mailto:kanapcio.biznes@gmail.com" class="contact-link">kanapcio.biznes@gmail.com</a>
         <p>Discord: <strong>kanapcio.</strong></p>
