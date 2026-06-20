@@ -70,27 +70,33 @@
         }
 
         .gallery { 
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-            gap: 25px; 
-        }
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+    gap: 25px; 
+    /* Karty będą równej wysokości w całym rzędzie */
+    align-items: stretch; 
+}
 
-        .work-item { 
-            background: var(--card-bg); 
-            border: 1px solid #1a1a1a; 
-            overflow: hidden; 
-            transition: var(--transition); 
-            display: flex;
-            flex-direction: column;
-        }
-        .work-item:hover { border-color: #444; transform: scale(1.02); }
+.work-item { 
+    background: var(--card-bg); 
+    border: 1px solid #1a1a1a; 
+    overflow: hidden; 
+    transition: var(--transition); 
+    display: flex;
+    flex-direction: column;
+    /* Sprawia, że opis zawsze wyląduje na samym dole karty */
+    justify-content: space-between; 
+    height: 100%;
+}
 
-        .work-item img { 
-            width: 100%; 
-            height: auto; 
-            display: block; 
-            filter: grayscale(1); 
-            transition: 0.5s; 
-        }
+.work-item img { 
+    width: 100%; 
+    /* Każdy obrazek zajmie maksymalnie tyle samo miejsca, dopasowując się */
+    height: 200px; 
+    object-fit: cover; 
+    display: block; 
+    filter: grayscale(1); 
+    transition: 0.5s; 
+}
         .work-item:hover img { filter: grayscale(0); }
         .work-desc { padding: 15px; font-size: 0.8rem; color: var(--text-gray); text-transform: uppercase; }
 
